@@ -1,0 +1,41 @@
+div.page-footer {
+  display: inline-flex;
+  padding-top: 9px;
+  margin: 10px 0 20px;
+  border-radius: 15px;
+  width: 100%;
+
+  .page-footer-section {
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    padding-left: 10px;
+    width: 100%;
+
+    .testimonials {
+
+    }
+
+    .company-links {
+      a {
+        font-size: 14pt;
+        text-decoration: none;
+
+        &:hover, &:link, &:active, &:visited {
+          color: $link-color;
+        }
+      }
+
+      .separator {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+
+    .social-buttons {
+      a {
+        font-size: 20pt;
+        text-decoration: none;
+      }
+    }
+  }
+}

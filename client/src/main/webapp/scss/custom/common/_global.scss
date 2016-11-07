@@ -1,0 +1,16 @@
+body {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen {
+  body {
+    max-width: 1024px;
+  }
+}
+
+@media tablet {
+  body {
+    max-width: 768px !important;
+  }
+}

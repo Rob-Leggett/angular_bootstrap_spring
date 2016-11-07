@@ -1,0 +1,11 @@
+.dropdown {
+  cursor:	pointer !important;
+
+  .dropdown-menu {
+    min-width: 200px;
+
+    .glyphicon {
+      padding-right: 10px;
+    }
+  }
+}

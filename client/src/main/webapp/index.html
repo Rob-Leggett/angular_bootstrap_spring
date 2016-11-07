@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html data-ng-app="app">
+	<head>
+        <meta charset="utf-8"/>
+
+        <base href="/"/>
+
+        <link rel="icon" href="img/favicon.png"/>
+
+       <!-- inject:css -->
+       <!-- endinject -->
+		
+		<title>Customer Library</title>
+	</head>
+	<body>
+
+        <div ng-include src="'html/partials/common/header.html'"></div>
+
+        <div ng-include src="'html/partials/common/menu.html'"></div>
+
+        <div ng-include src="'html/partials/common/alert.html'"></div>
+
+        <div ng-include src="'html/partials/common/error.html'"></div>
+
+		<div class="section">
+
+			<div data-ng-view></div>
+		</div>
+
+        <div ng-include src="'html/partials/common/footer.html'"></div>
+
+        <!-- inject:js -->
+        <!-- endinject -->
+	</body>
+</html>
