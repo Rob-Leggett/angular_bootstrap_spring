@@ -2,7 +2,7 @@ angular_bootstrap_spring
 ========================
 [![Build Status](https://travis-ci.org/Rob-Leggett/angular_bootstrap_spring.svg?branch=master)](https://travis-ci.org/Rob-Leggett/angular_bootstrap_spring)
 
-Angular JS with Bootstrap and Spring 4 and Spring Security
+Angular JS with Bootstrap and Spring 4 and Spring Security.
 
 This example is an angular js single page application (SPA) with bootstrap for the widgets and styling.
 
