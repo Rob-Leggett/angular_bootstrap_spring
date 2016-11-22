@@ -32,7 +32,7 @@ angular.module('app.services').service('customerService', [ '$http', '$q', 'prop
     this.saveCustomer = function (customer) {
         var d = $q.defer();
 
-        $http.post(propertiesConstant.API_URL + '/customer/', customer)
+        $http.post(propertiesConstant.API_URL + '/customer', customer)
             .success(function (response) {
                 d.resolve(response);
             })
