@@ -4,7 +4,7 @@ angular.module('app.services').service('userService', ['$http', '$q', 'propertie
     this.retrieve = function retrieve() {
         var d = $q.defer();
 
-        $http.get(propertiesConstant.API_URL + '/user/retrieve')
+        $http.get(propertiesConstant.API_URL + '/user')
             .success(function (user) {
                 d.resolve(user);
             })

@@ -60,7 +60,7 @@ public class UserControllerEndpointUnitTest {
         String basicDigestHeaderValue = "Basic " + new String(Base64.encode(("test-user-db@tester.com.au:password").getBytes()));
 
         mockMvc.perform(
-                get("/user/retrieve")
+                get("/user")
                         .with(testSecurityContext())
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .header("Authorization", basicDigestHeaderValue))
@@ -72,7 +72,7 @@ public class UserControllerEndpointUnitTest {
     @Test
     public void shouldNotGetAuthenticatedUserWithNoUserDetails() throws Exception {
         mockMvc.perform(
-                get("/user/retrieve")
+                get("/user")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
     }

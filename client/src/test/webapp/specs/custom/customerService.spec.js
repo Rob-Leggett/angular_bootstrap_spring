@@ -34,7 +34,7 @@ describe('CustomerService Tests', function (){
                 {"id": 4, "firstName": "Sam", "lastName": "Sully"}
             ];
 
-            $httpBackend.whenGET(propertiesConstant.API_URL + '/customer/customers/retrieve').respond(customers);
+            $httpBackend.whenGET(propertiesConstant.API_URL + '/customer').respond(customers);
 
             // check result returned from service call
             customerService.getCustomers().then(function (data) {
@@ -43,7 +43,7 @@ describe('CustomerService Tests', function (){
 
             $httpBackend.flush();
 
-            $httpBackend.expectGET(propertiesConstant.API_URL + '/customer/customers/retrieve').respond(customers);
+            $httpBackend.expectGET(propertiesConstant.API_URL + '/customer').respond(customers);
         }));
     });
 });

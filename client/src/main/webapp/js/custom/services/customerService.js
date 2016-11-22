@@ -4,7 +4,7 @@ angular.module('app.services').service('customerService', [ '$http', '$q', 'prop
     this.getCustomers = function () {
         var d = $q.defer();
 
-        $http.get(propertiesConstant.API_URL + '/customer/customers/retrieve')
+        $http.get(propertiesConstant.API_URL + '/customer')
             .success(function (customers) {
                 d.resolve(customers);
             })
@@ -18,7 +18,7 @@ angular.module('app.services').service('customerService', [ '$http', '$q', 'prop
     this.deleteCustomer = function (id) {
         var d = $q.defer();
 
-        $http.delete(propertiesConstant.API_URL + '/customer/delete/' + id)
+        $http.delete(propertiesConstant.API_URL + '/customer/' + id)
             .success(function (response) {
                 d.resolve(response);
             })
@@ -32,7 +32,7 @@ angular.module('app.services').service('customerService', [ '$http', '$q', 'prop
     this.saveCustomer = function (customer) {
         var d = $q.defer();
 
-        $http.post(propertiesConstant.API_URL + '/customer/save', customer)
+        $http.post(propertiesConstant.API_URL + '/customer/', customer)
             .success(function (response) {
                 d.resolve(response);
             })
