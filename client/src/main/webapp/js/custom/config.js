@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('app').config([ '$routeProvider', '$httpProvider', '$locationProvider', function($routeProvider, $httpProvider, $locationProvider) {
-
+angular.module('app').config([ '$routeProvider', '$httpProvider', '$locationProvider',
+  function($routeProvider, $httpProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 
     var user = ['$rootScope', 'userService','storageService', 'storageConstant', function ($rootScope, userService, storageService, storageConstant) {

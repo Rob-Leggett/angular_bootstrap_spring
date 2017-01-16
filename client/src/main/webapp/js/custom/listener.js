@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('app').run(['$rootScope', '$http', '$location', 'titleService', function ($rootScope, $http, $location, titleService) {
-
+angular.module('app').run(['$rootScope', '$http', '$location', 'titleService',
+  function ($rootScope, $http, $location, titleService) {
     $rootScope.navigateTo = "/main";
 
     $rootScope.$on('$routeChangeSuccess', function(event, next, current) {

@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('app.services').service('base64Service', function () {
+angular.module('app.services').service('base64Service',
+    function () {
     var keyStr = "ABCDEFGHIJKLMNOP" +
         "QRSTUVWXYZabcdef" +
         "ghijklmnopqrstuv" +

@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('app.directives').directive('exampleFocus', function ($timeout) {
+angular.module('app.directives').directive('exampleFocus',
+    function ($timeout) {
     return {
         scope: {
             trigger: '@exampleFocus'

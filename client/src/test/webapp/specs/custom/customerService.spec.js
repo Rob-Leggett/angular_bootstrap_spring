@@ -37,8 +37,8 @@ describe('CustomerService Tests', function (){
             $httpBackend.whenGET(propertiesConstant.API_URL + '/customer').respond(customers);
 
             // check result returned from service call
-            customerService.getCustomers().then(function (data) {
-                expect(data).toEqual(customers);
+            customerService.getCustomers().then(function (customers) {
+                expect(customers).toEqual(customers);
             });
 
             $httpBackend.flush();

@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('app.services').service('messageService', ['$rootScope', function ($rootScope) {
+angular.module('app.services').service('messageService', ['$rootScope',
+  function ($rootScope) {
     $rootScope.errors = [];
     $rootScope.alerts = [];
 

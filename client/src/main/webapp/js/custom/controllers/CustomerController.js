@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('app.controllers').controller('CustomerController',['$rootScope', '$scope', '$location', 'customerService', 'messageService', function ($rootScope, $scope, $location, customerService, messageService) {
-
+angular.module('app.controllers').controller('CustomerController',['$rootScope', '$scope', '$location', 'customerService', 'messageService',
+  function ($rootScope, $scope, $location, customerService, messageService) {
     customerService.getCustomers().then(
         function success(customers) {
             $scope.customers = customers;

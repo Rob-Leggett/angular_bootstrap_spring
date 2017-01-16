@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('app.services').service('customerService', [ '$http', '$q', 'propertiesConstant', function ($http, $q, propertiesConstant) {
+angular.module('app.services').service('customerService', [ '$http', '$q', 'propertiesConstant',
+  function ($http, $q, propertiesConstant) {
     this.getCustomers = function () {
         var d = $q.defer();
 
         $http.get(propertiesConstant.API_URL + '/customer')
-            .success(function (customers) {
-                d.resolve(customers);
-            })
-            .error(function (data, status, headers, config) {
-                d.reject(status);
+            .then(function success(response) {
+                d.resolve(response.data);
+            }, function error(response) {
+                d.reject(response.status);
             });
 
         return d.promise;
@@ -19,10 +19,9 @@ angular.module('app.services').service('customerService', [ '$http', '$q', 'prop
         var d = $q.defer();
 
         $http.delete(propertiesConstant.API_URL + '/customer/' + id)
-            .success(function (response) {
-                d.resolve(response);
-            })
-            .error(function () {
+            .then(function success(response) {
+                d.resolve(response.data);
+            }, function error() {
                 d.reject();
             });
 
@@ -33,10 +32,9 @@ angular.module('app.services').service('customerService', [ '$http', '$q', 'prop
         var d = $q.defer();
 
         $http.post(propertiesConstant.API_URL + '/customer', customer)
-            .success(function (response) {
-                d.resolve(response);
-            })
-            .error(function () {
+            .then(function success(response) {
+                d.resolve(response.data);
+            }, function error() {
                 d.reject();
             });
 

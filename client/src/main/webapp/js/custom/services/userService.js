@@ -5,10 +5,9 @@ angular.module('app.services').service('userService', ['$http', '$q', 'propertie
         var d = $q.defer();
 
         $http.get(propertiesConstant.API_URL + '/user')
-            .success(function (user) {
-                d.resolve(user);
-            })
-            .error(function () {
+            .then(function success(response) {
+                d.resolve(response.data);
+            }, function error() {
                 d.reject();
             });
 

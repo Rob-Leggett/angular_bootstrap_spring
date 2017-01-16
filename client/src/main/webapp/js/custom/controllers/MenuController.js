@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('app.controllers').controller('MenuController', ['$location', '$scope', 'authenticationService', 'messageService', function ($location, $scope, authenticationService, messageService) {
+angular.module('app.controllers').controller('MenuController', ['$location', '$scope', 'authenticationService', 'messageService',
+  function ($location, $scope, authenticationService, messageService) {
     $scope.logout = function logout() {
         authenticationService.logout()
             .then(function() {

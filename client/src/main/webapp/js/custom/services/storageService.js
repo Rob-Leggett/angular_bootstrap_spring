@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('app.services').service('storageService', ['$rootScope', '$window', function ($rootScope, $window) {
+angular.module('app.services').service('storageService', ['$rootScope', '$window',
+  function ($rootScope, $window) {
     this.getLocalItem = function (key) {
         return JSON.parse($window.localStorage.getItem(key));
     };

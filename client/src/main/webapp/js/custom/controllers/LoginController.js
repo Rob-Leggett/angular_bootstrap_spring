@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('app.controllers').controller('LoginController', ['$location', '$rootScope', '$scope', 'authenticationService', 'messageService', function ($location, $rootScope, $scope, authenticationService, messageService) {
+angular.module('app.controllers').controller('LoginController', ['$location', '$rootScope', '$scope', 'authenticationService', 'messageService',
+  function ($location, $rootScope, $scope, authenticationService, messageService) {
     $scope.login = function (credentials) {
         authenticationService.login(credentials)
             .then(function() {

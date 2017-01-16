@@ -33,15 +33,15 @@
     "yargs": "^3.20.0"
   },
   "dependencies": {
-    "angular": "~1.4.4",
-    "angular-animate": "~1.4.4",
-    "angular-aria": "~1.4.4",
-    "angular-cookies": "~1.4.4",
-    "angular-messages": "~1.4.4",
-    "angular-mocks": "~1.4.4",
-    "angular-resource": "~1.4.4",
-    "angular-route": "~1.4.4",
-    "angular-sanitize": "~1.4.4",
+    "angular": "~1.6.1",
+    "angular-animate": "~1.6.1",
+    "angular-aria": "~1.6.1",
+    "angular-cookies": "~1.6.1",
+    "angular-messages": "~1.6.1",
+    "angular-mocks": "~1.6.1",
+    "angular-resource": "~1.6.1",
+    "angular-route": "~1.6.1",
+    "angular-sanitize": "~1.6.1",
     "bootstrap-sass": "~3.3.5",
     "font-awesome": "~4.4.0"
   }
