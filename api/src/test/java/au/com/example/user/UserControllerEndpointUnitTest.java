@@ -65,7 +65,6 @@ public class UserControllerEndpointUnitTest {
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .header("Authorization", basicDigestHeaderValue))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.email").value("test-user-db@tester.com.au"));
     }
 
