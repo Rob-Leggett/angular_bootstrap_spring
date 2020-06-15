@@ -21,7 +21,7 @@
         <servlet.version>3.1.0</servlet.version>
 
         <spring.version>5.0.10.RELEASE</spring.version>
-        <spring.security.version>4.2.4.RELEASE</spring.security.version>
+        <spring.security.version>5.3.3.RELEASE</spring.security.version>
         <hibernate.version>5.2.4.Final</hibernate.version>
         <hibernate.entity.manager.version>5.1.0.Final</hibernate.entity.manager.version>
         <hibernate.jpa.version>1.0.0.Final</hibernate.jpa.version>
