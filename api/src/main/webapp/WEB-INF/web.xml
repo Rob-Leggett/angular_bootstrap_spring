@@ -14,10 +14,6 @@
 			org.springframework.security.web.session.HttpSessionEventPublisher
 		</listener-class>
 	</listener>
-	
-	<listener>
-	    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-	</listener>
 
     <context-param>
         <param-name>contextClass</param-name>
