@@ -15,12 +15,12 @@
     <properties>
         <jacoco.it.execution.data.file>${project.build.directory}/coverage-reports/it/jacoco.exec</jacoco.it.execution.data.file>
         <jacoco.ut.execution.data.file>${project.build.directory}/coverage-reports/ut/jacoco.exec</jacoco.ut.execution.data.file>
-        <jdk.version>1.8</jdk.version>
+        <jdk.version>16</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <servlet.version>3.1.0</servlet.version>
 
-        <spring.version>5.2.15.RELEASE</spring.version>
+        <spring.version>5.3.7</spring.version>
         <spring.security.version>5.5.0</spring.security.version>
         <hibernate.version>5.2.5.Final</hibernate.version>
         <hibernate.entity.manager.version>5.1.0.Final</hibernate.entity.manager.version>
@@ -36,6 +36,7 @@
         <commons.io.version>2.7</commons.io.version>
         <jackson.version>2.12.3</jackson.version>
         <el.version>2.2.5</el.version>
+        <jaxb.version>2.3.0</jaxb.version>
         <jtds.version>1.3.1</jtds.version>
         <joda.time.version>2.2</joda.time.version>
         <mail.version>1.5.2</mail.version>
@@ -50,7 +51,7 @@
         <build.helper.maven.plugin.version>1.9</build.helper.maven.plugin.version>
         <maven.surefire.plugin.version>2.17</maven.surefire.plugin.version>
         <maven.failsafe.plugin.version>2.17</maven.failsafe.plugin.version>
-        <jacoco.maven.plugin.version>0.7.1.201405082137</jacoco.maven.plugin.version>
+        <jacoco.maven.plugin.version>0.8.6</jacoco.maven.plugin.version>
     </properties>
 
     <profiles>
@@ -257,6 +258,21 @@
         </dependency>
 
         <!-- Dependent Resources -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
         <dependency>
             <groupId>net.sourceforge.jtds</groupId>
             <artifactId>jtds</artifactId>
