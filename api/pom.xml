@@ -45,7 +45,7 @@
         <mockito.version>1.9.5</mockito.version>
         <json.path.version>2.4.0</json.path.version>
 
-        <hsqldb.version>2.3.2</hsqldb.version>
+        <hsqldb.version>2.7.1</hsqldb.version>
 
         <maven.war.plugin>3.3.1</maven.war.plugin>
         <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
