@@ -20,7 +20,7 @@
 
         <servlet.version>3.1.0</servlet.version>
 
-        <spring.version>5.3.7</spring.version>
+        <spring.version>5.3.33</spring.version>
         <spring.security.version>5.5.0</spring.security.version>
         <hibernate.version>5.2.5.Final</hibernate.version>
         <hibernate.entity.manager.version>5.1.0.Final</hibernate.entity.manager.version>
