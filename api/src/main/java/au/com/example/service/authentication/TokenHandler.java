@@ -6,12 +6,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Base64;
 
 public final class TokenHandler {
 
@@ -75,11 +75,11 @@ public final class TokenHandler {
     }
 
     private String toBase64(byte[] content) {
-        return DatatypeConverter.printBase64Binary(content);
+        return Base64.getEncoder().encodeToString(content);
     }
 
     private byte[] fromBase64(String content) {
-        return DatatypeConverter.parseBase64Binary(content);
+        return Base64.getDecoder().decode(content);
     }
 
     // synchronized to guard internal hmac object

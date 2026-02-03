@@ -6,13 +6,19 @@
     <artifactId>angular_bootstrap_spring</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Angular JS with Bootstrap and Spring Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+    <name>Angular Bootstrap Spring</name>
+    <description>Angular 19 with Bootstrap 5 and Spring Boot 3</description>
+    <url>https://github.com/Rob-Leggett/angular_bootstrap_spring</url>
 
     <modules>
         <module>api</module>
         <module>client</module>
     </modules>
+
+    <properties>
+        <java.version>21</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <developers>
         <developer>
@@ -22,7 +28,7 @@
                 <role>Technical Team Lead</role>
                 <role>Senior Developer</role>
             </roles>
-            <url>http://robertleggett.wordpress.com/</url>
+            <url>https://robertleggett.com.au</url>
         </developer>
     </developers>
 

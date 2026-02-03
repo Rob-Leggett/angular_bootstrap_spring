@@ -1,23 +1,19 @@
 package au.com.speak.persistence.dao.user;
 
+import au.com.example.Application;
 import au.com.example.persistence.dao.user.UserDAO;
 import au.com.example.service.user.model.SpringUserDetail;
-import au.com.example.spring.PersistenceConfig;
-import au.com.example.spring.SecurityConfig;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { SecurityConfig.class, PersistenceConfig.class })
+@SpringBootTest(classes = Application.class)
 public class UserDaoIntegrationTest {
 
     @Autowired
@@ -33,15 +29,15 @@ public class UserDaoIntegrationTest {
     @Test
     public void shouldUpdateUserSuccessfully() {
 
-        SpringUserDetail before = (SpringUserDetail)userDao.loadUser("test-user-db@tester.com.au");
+        SpringUserDetail before = (SpringUserDetail)userDao.loadUser("user@tester.com.au");
 
         assertEquals("Test User", before.getAlias());
 
         userDao.updateUser(
-                new SpringUserDetail("test-user-db@tester.com.au", "$2a$10$xT/t.6abkjaRpAkNOrt43OD9Cn2aaS3vgxQsnLtEN7mOi6RpACvbm",
+                new SpringUserDetail("user@tester.com.au", "$2a$10$xT/t.6abkjaRpAkNOrt43OD9Cn2aaS3vgxQsnLtEN7mOi6RpACvbm",
                         "Test", "User", "Test User Updated", new ArrayList<GrantedAuthority>(), true, true, true, true));
 
-        SpringUserDetail after = (SpringUserDetail)userDao.loadUser("test-user-db@tester.com.au");
+        SpringUserDetail after = (SpringUserDetail)userDao.loadUser("user@tester.com.au");
 
         assertEquals("Test User Updated", after.getAlias());
     }

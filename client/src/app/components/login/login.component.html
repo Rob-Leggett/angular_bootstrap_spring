@@ -1,0 +1,68 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">
+            <i class="bi bi-lock-fill me-2"></i>Login
+          </h4>
+        </div>
+        <div class="card-body">
+          @if (error()) {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error() }}
+              <button type="button" class="btn-close" (click)="error.set(null)"></button>
+            </div>
+          }
+
+          <form (ngSubmit)="login()">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                <input 
+                  type="email" 
+                  class="form-control" 
+                  id="email" 
+                  [(ngModel)]="email" 
+                  name="email"
+                  placeholder="Enter your email"
+                  required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-key"></i></span>
+                <input 
+                  type="password" 
+                  class="form-control" 
+                  id="password" 
+                  [(ngModel)]="password" 
+                  name="password"
+                  placeholder="Enter your password"
+                  required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="loading()">
+              @if (loading()) {
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Logging in...
+              } @else {
+                <i class="bi bi-box-arrow-in-right me-2"></i>Login
+              }
+            </button>
+          </form>
+
+          <div class="mt-3 text-muted small">
+            <strong>Demo credentials:</strong><br>
+            Email: user&#64;tester.com.au<br>
+            Password: password
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

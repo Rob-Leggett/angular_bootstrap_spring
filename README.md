@@ -1,87 +1,161 @@
-angular_bootstrap_spring
-========================
-[![Build Status](https://travis-ci.org/Rob-Leggett/angular_bootstrap_spring.svg?branch=master)](https://travis-ci.org/Rob-Leggett/angular_bootstrap_spring)
+# Angular Bootstrap Spring
 
-Angular JS with Bootstrap and Spring 4 and Spring Security.
+[![CI](https://github.com/Rob-Leggett/angular_bootstrap_spring/actions/workflows/ci.yml/badge.svg)](https://github.com/Rob-Leggett/angular_bootstrap_spring/actions/workflows/ci.yml)
+[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.org/projects/jdk/21/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3-green.svg)](https://spring.io/projects/spring-boot)
+[![Angular](https://img.shields.io/badge/Angular-19-red.svg)](https://angular.dev/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple.svg)](https://getbootstrap.com/)
 
-This example is an angular js single page application (SPA) with bootstrap for the widgets and styling.
+A modern single-page application built with **Angular 19** and **Bootstrap 5** for the frontend, backed by **Spring Boot 3.3** with **Spring Security 6** for the API.
 
-The application has been broken into two modules API and CLIENT, both are built separately and both are deployed separately.
+## Tech Stack
 
-The API can run on any web server, but it has been tested against Tomcat 8, the server required http DELETE and PUT, so ensure your web server can support those http methods.
+### Backend (API)
+- **Java 21** (LTS)
+- **Spring Boot 3.3** with Spring Security 6
+- **Stateless JWT-style token authentication**
+- **HSQLDB** in-memory database (for demo purposes)
+- **JPA/Hibernate** for persistence
+- **JUnit 5** for testing
 
-The CLIENT currently is run via gulp, for a production release you could extract the .zip artefact and run the static client via Apache.
+### Frontend (Client)
+- **Angular 19** with standalone components
+- **Bootstrap 5.3** for styling
+- **TypeScript 5.7**
+- **Angular CLI** for builds
 
-Ensure that you proxy the API so that you have the same domain otherwise you will experience CORS related issues. (deployed artefacts only)
+## Architecture
 
-### Gulp:
-Used as the build tool for the client, this has been written using ES6
+The application is split into two modules:
 
-### Spring 4:
-Used to create RESTful controller interfaces which in turn gets called through ajax requests.
-	
-### Spring Security 4:
-Used for a stateless api that allows authentication via basic authentication or token authentication.
+- **API** - Spring Boot REST backend (stateless, token-based auth)
+- **Client** - Angular SPA frontend
 
-Upon authentication a token is attached to the header response which can in turn be used for sequential requests to be authenticated against.
+## Quick Start
 
-When an authentication fails a 401 will always be returned.
+### Prerequisites
+- **Java 21** or higher
+- **Maven 3.8+**
+- **Node.js 22** (optional - Maven downloads it automatically)
 
-### Login Details as per database inject.sql:
-**Username =** user@tester.com.au
+### Build Everything
 
-**Password =** password
+```bash
+mvn clean package
+```
 
-Testing
-====================
-Simply run on the parent pom to have node and modules auto install and execute all tests. **(REQUIRED FOR FIRST RUN)**
+This builds both the API and client modules.
 
-Ensure you have Maven 3.2.0+
+### Run the API
 
-**mvn clean install**
+```bash
+cd api
+mvn spring-boot:run
+```
 
-To run specific profiles please run mvn clean install and simple pass the profile you wish to execute.
+The API will be available at `http://localhost:8080/api`
 
-This will execute Java and Jasmine tests that will test both java classes and angular js files.
+### Run the Client (Development)
 
-You can also run jasmine only tests if you wish via the front end:
+```bash
+cd client
+npm install
+npm start
+```
 
-**http://localhost:4444/test**
+The client dev server runs at `http://localhost:4200` with API proxy to `http://localhost:8080`.
 
-Running
-====================
+## Authentication
 
-### Recommendations:
+The API uses stateless token-based authentication:
 
-Use IntelliJ 16+ to run the application.
+1. Login with Basic Auth to `/api/auth/login`
+2. Receive a token in the `X-AUTH-TOKEN` response header
+3. Include the token in subsequent requests via `X-AUTH-TOKEN` header
 
-### Run the API via Tomcat 8:
+### Default Credentials
 
-Deploy exploded artefact to Tomcat 8 and ensure the root context is set to API.
+| Username | Password |
+|----------|----------|
+| user@tester.com.au | password |
 
-### Run the CLIENT via gulp.babel.js:
+## API Endpoints
 
-Where PATH is the directory to your checked out project.
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| POST | `/api/auth/login` | Login (Basic Auth) | No |
+| GET | `/api/user` | Get current user | Yes |
+| GET | `/api/customer` | List all customers | Yes |
+| GET | `/api/customer/{id}` | Get customer by ID | Yes |
+| POST | `/api/customer` | Create customer | Yes |
+| PUT | `/api/customer/{id}` | Update customer | Yes |
+| DELETE | `/api/customer/{id}` | Delete customer | Yes |
 
-**Gulp File:** PATH\angular_bootstrap_spring\client\gulpfile.babel.js
+## Development
 
-**Tasks:** run
+### Backend Development
 
-**Node Interpreter:** PATH\angular_bootstrap_spring\client\node\node.exe
+```bash
+cd api
+mvn clean verify        # Run tests
+mvn spring-boot:run     # Run with hot reload
+```
 
-**Gulp package:** PATH\angular_bootstrap_spring\client\node_modules\gulp
+### Frontend Development
 
-### The application is set to run on
+```bash
+cd client
+npm install             # Install dependencies
+npm start               # Dev server with hot reload
+npm run build           # Production build
+npm run test            # Run unit tests
+```
 
-**http://localhost:4444**
+### IDE Setup
 
-Donations
-====================
+**IntelliJ IDEA** is recommended. Import the project as a Maven project.
 
-### How you can help?
+For the frontend, ensure the Angular Language Service plugin is installed.
 
-Any donations received will be able to assist me provide more blog entries and examples via GitHub, any contributions provided is greatly appreciated.
+## Project Structure
 
-Thanks for your support.
+```
+angular_bootstrap_spring/
+├── api/                          # Spring Boot backend
+│   ├── src/main/java/
+│   │   └── au/com/example/
+│   │       ├── Application.java  # Spring Boot entry point
+│   │       ├── spring/           # Security & config
+│   │       ├── controller/       # REST controllers
+│   │       ├── service/          # Business logic
+│   │       ├── repository/       # Data access
+│   │       └── entity/           # JPA entities
+│   └── src/main/resources/
+│       ├── application.properties
+│       └── data.sql              # Sample data
+├── client/                       # Angular frontend
+│   ├── src/app/
+│   │   ├── components/           # Angular components
+│   │   ├── services/             # HTTP services
+│   │   ├── guards/               # Route guards
+│   │   └── models/               # TypeScript interfaces
+│   └── angular.json
+└── pom.xml                       # Parent POM
+```
+
+## License
+
+[MIT License](LICENSE)
+
+## Author
+
+**Robert Leggett**
+- [Blog](https://robertleggett.com.au)
+
+---
+
+## Support
+
+If you find this project helpful, consider supporting further development:
 
 [![paypal](https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EV2ZLZBABFJ34&lc=AU&item_name=Research%20%26%20Development&currency_code=AUD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)

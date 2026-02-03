@@ -1,98 +1,74 @@
 package au.com.example.spring;
 
-import au.com.example.persistence.provider.CustomDaoAuthenticationProvider;
-import au.com.example.service.user.UserService;
 import au.com.example.spring.security.StatelessAuthenticationFilter;
 import au.com.example.spring.security.StatelessTokenAuthenticationFilter;
-import au.com.example.spring.security.UnauthorisedEntryPoint;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-@ComponentScan(basePackages = { "au.com.example.service", "au.com.example.spring.security" })
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableMethodSecurity(prePostEnabled = true)
+public class SecurityConfig {
 
-    private static final String LOGOUT_URL = "/auth/logout";
-    private static final String LOGOUT_SUCCESS_URL = "/auth/logout/validate?status=success";
+    private final StatelessAuthenticationFilter statelessAuthenticationFilter;
+    private final StatelessTokenAuthenticationFilter statelessTokenAuthenticationFilter;
+    private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private UnauthorisedEntryPoint unauthorisedEntryPoint;
-
-    @Autowired
-    private StatelessAuthenticationFilter statelessAuthenticationFilter;
-
-    @Autowired
-    private StatelessTokenAuthenticationFilter statelessTokenAuthenticationFilter;
-
-    @Autowired
-    private UserService userService;
-
-    // ========= Overrides ===========
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .csrf().disable()
-            .httpBasic()
-                .authenticationEntryPoint(unauthorisedEntryPoint)
-                .and()
-            .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .and()
-            .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-            .logout()
-                .logoutUrl(LOGOUT_URL)
-                .logoutSuccessUrl(LOGOUT_SUCCESS_URL)
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .and()
-            .addFilterBefore(statelessAuthenticationFilter, BasicAuthenticationFilter.class)
-            .addFilterAfter(statelessTokenAuthenticationFilter, BasicAuthenticationFilter.class);
+    public SecurityConfig(StatelessAuthenticationFilter statelessAuthenticationFilter,
+                          StatelessTokenAuthenticationFilter statelessTokenAuthenticationFilter,
+                          UserDetailsService userDetailsService,
+                          PasswordEncoder passwordEncoder) {
+        this.statelessAuthenticationFilter = statelessAuthenticationFilter;
+        this.statelessTokenAuthenticationFilter = statelessTokenAuthenticationFilter;
+        this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(getDaoAuthenticationProvider());
-    }
-
-    // =========== Beans ============
-
-    @Override
     @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(csrf -> csrf.disable())
+            .httpBasic(basic -> basic
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.setStatus(401);
+                    response.setContentType("application/json");
+                    response.getWriter().write("{\"error\": \"Unauthorized\"}");
+                })
+            )
+            .authorizeHttpRequests(auth -> auth
+                .anyRequest().permitAll()
+            )
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+            .addFilterBefore(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterAfter(statelessTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
     }
 
-    @Bean(name = "passwordEncoder")
-    public PasswordEncoder getPasswordEncoder() {
-        return new BCryptPasswordEncoder();
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 
-    // =========== Helpers ============
-
-    private AuthenticationProvider getDaoAuthenticationProvider() {
-        CustomDaoAuthenticationProvider authenticationProvider = new CustomDaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userService);
-        authenticationProvider.setPasswordEncoder(getPasswordEncoder());
-
-        return authenticationProvider;
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder);
+        return authProvider;
     }
 }

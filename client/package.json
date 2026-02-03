@@ -1,48 +1,41 @@
 {
   "name": "client",
   "version": "0.0.1-SNAPSHOT",
-  "description": "example",
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --proxy-config proxy.conf.json",
+    "build": "ng build",
+    "build:prod": "ng build --configuration production",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^19.2.0",
+    "@angular/compiler": "^19.2.0",
+    "@angular/core": "^19.2.0",
+    "@angular/forms": "^19.2.0",
+    "@angular/platform-browser": "^19.2.0",
+    "@angular/platform-browser-dynamic": "^19.2.0",
+    "@angular/router": "^19.2.0",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "babel-core": "^6.7.0",
-    "babel-preset-es2015": "^6.6.0",
-    "babel-register": "^6.6.5",
-    "connect-livereload": "^0.5.3",
-    "date-format": "0.0.2",
-    "event-stream": "^3.3.4",
-    "express": "^4.13.3",
-    "gulp": "^3.9.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-if": "^1.2.5",
-    "gulp-inject": "^1.5.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.0.4",
-    "gulp-sourcemaps": "^1.5.2",
-    "gulp-uglifyjs": "^0.6.2",
-    "gulp-util": "^3.0.6",
-    "gulp-zip": "^2.0.3",
-    "http-proxy": "^1.11.1",
-    "minimatch": "^3.0.2",
-    "moment": "^2.10.6",
-    "morgan": "^1.6.1",
-    "tiny-lr": "^0.1.6",
-    "yargs": "^3.20.0"
-  },
-  "dependencies": {
-    "angular": "~1.8.0",
-    "angular-animate": "~1.6.1",
-    "angular-aria": "~1.6.1",
-    "angular-cookies": "~1.6.1",
-    "angular-messages": "~1.6.1",
-    "angular-mocks": "~1.6.1",
-    "angular-resource": "~1.6.1",
-    "angular-route": "~1.6.1",
-    "angular-sanitize": "~1.6.1",
-    "bootstrap-sass": "~3.4.1",
-    "font-awesome": "~4.4.0"
+    "@angular-devkit/build-angular": "^19.2.19",
+    "@angular/cli": "^19.2.19",
+    "@angular/compiler-cli": "^19.2.0",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.6.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.7.2"
   }
 }

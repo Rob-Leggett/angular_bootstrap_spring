@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">
+      <i class="bi bi-people-fill me-2"></i>Customer Library
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        @if (authService.isAuthenticated()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/customers" routerLinkActive="active">Customers</a>
+          </li>
+        }
+      </ul>
+      <ul class="navbar-nav">
+        @if (authService.isAuthenticated()) {
+          <li class="nav-item">
+            <span class="nav-link text-light">
+              <i class="bi bi-person-circle me-1"></i>
+              {{ authService.currentUser()?.alias }}
+            </span>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-light btn-sm" (click)="logout()">
+              <i class="bi bi-box-arrow-right me-1"></i>Logout
+            </button>
+          </li>
+        } @else {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">
+              <i class="bi bi-box-arrow-in-right me-1"></i>Login
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>

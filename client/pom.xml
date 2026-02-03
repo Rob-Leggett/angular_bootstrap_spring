@@ -11,103 +11,23 @@
 
     <artifactId>client</artifactId>
     <packaging>pom</packaging>
+    <name>Angular Bootstrap Spring Client</name>
+    <description>Angular 19 frontend with Bootstrap 5</description>
 
     <properties>
-        <jdk.version>16</jdk.version>
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <node.version>v6.9.1</node.version>
-        <npm.version>3.10.8</npm.version>
-
-        <phantomjs.maven.plugin.version>0.7</phantomjs.maven.plugin.version>
-        <phantomjs.configuration.version>2.1.1</phantomjs.configuration.version>
-        <jasmine.maven.plugin.version>2.0</jasmine.maven.plugin.version>
-        <frontend.maven.plugin>1.3</frontend.maven.plugin>
+        <node.version>v22.12.0</node.version>
+        <npm.version>10.9.0</npm.version>
+        <frontend.maven.plugin.version>1.15.1</frontend.maven.plugin.version>
     </properties>
 
     <build>
         <finalName>client</finalName>
-
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>com.github.klieber</groupId>
-                    <artifactId>phantomjs-maven-plugin</artifactId>
-                    <version>${phantomjs.maven.plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>com.github.searls</groupId>
-                    <artifactId>jasmine-maven-plugin</artifactId>
-                    <version>${jasmine.maven.plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>com.github.eirslett</groupId>
-                    <artifactId>frontend-maven-plugin</artifactId>
-                    <version>${frontend.maven.plugin}</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
         <plugins>
-            <plugin>
-                <groupId>com.github.klieber</groupId>
-                <artifactId>phantomjs-maven-plugin</artifactId>
-                <version>${phantomjs.maven.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>install</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <version>${phantomjs.configuration.version}</version>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.searls</groupId>
-                <artifactId>jasmine-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <webDriverClassName>org.openqa.selenium.phantomjs.PhantomJSDriver</webDriverClassName>
-                    <webDriverCapabilities>
-                        <capability>
-                            <name>phantomjs.binary.path</name>
-                            <value>${phantomjs.binary}</value>
-                        </capability>
-                    </webDriverCapabilities>
-                    <preloadSources>
-                        <!-- third-party -->
-                        <source>${project.basedir}/src/main/webapp/js/jquery/jquery.js</source>
-                        <source>${project.basedir}/node_modules/angular/angular.js</source>
-                        <source>${project.basedir}/node_modules/angular-route/angular-route.js</source>
-                        <source>${project.basedir}/node_modules/angular-messages/angular-messages.js</source>
-                        <source>${project.basedir}/node_modules/angular-aria/angular-aria.js</source>
-                        <!-- required -->
-                        <source>${project.basedir}/node_modules/angular-mocks/angular-mocks.js</source>
-                        <source>${project.basedir}/src/test/webapp/specs/angular/angular-jasmine.js</source>
-                        <!-- app -->
-                        <source>${project.basedir}/src/main/webapp/js/custom/*.js</source>
-                        <source>${project.basedir}/src/main/webapp/js/custom/**/*.js</source>
-                    </preloadSources>
-                    <jsSrcDir>${project.basedir}/src/main/webapp/js</jsSrcDir>
-                    <jsTestSrcDir>${project.basedir}/src/test/webapp/specs/custom</jsTestSrcDir>
-                    <specIncludes>
-                        <include>**/*.spec.js</include>
-                    </specIncludes>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>${frontend.maven.plugin}</version>
+                <version>${frontend.maven.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>install node and npm</id>
@@ -126,29 +46,24 @@
                             <goal>npm</goal>
                         </goals>
                         <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
                     </execution>
                     <execution>
-                        <id>gulp default</id>
+                        <id>npm build</id>
                         <goals>
-                            <goal>gulp</goal>
+                            <goal>npm</goal>
                         </goals>
                         <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>run build:prod</arguments>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>http://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <developers>
         <developer>
@@ -158,7 +73,7 @@
                 <role>Technical Team Lead</role>
                 <role>Senior Developer</role>
             </roles>
-            <url>http://robertleggett.wordpress.com/</url>
+            <url>https://robertleggett.com.au</url>
         </developer>
     </developers>
 </project>

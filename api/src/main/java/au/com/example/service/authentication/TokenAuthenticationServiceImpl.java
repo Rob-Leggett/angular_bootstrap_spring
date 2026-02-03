@@ -5,16 +5,17 @@ import au.com.example.persistence.dao.user.UserDAO;
 import au.com.example.service.user.model.SpringUserDetail;
 import au.com.example.service.user.model.UserDetail;
 import au.com.example.utils.AuthenticationUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.bind.DatatypeConverter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.util.Base64;
 
 @Service(Constants.SERVICE_TOKEN_AUTH)
 public class TokenAuthenticationServiceImpl implements TokenAuthenticationService {
@@ -22,13 +23,12 @@ public class TokenAuthenticationServiceImpl implements TokenAuthenticationServic
     private static final String AUTH_HEADER_NAME = "X-AUTH-TOKEN";
 
     private final TokenHandler tokenHandler;
+    private final UserDAO userDao;
 
-    @Autowired
-    private UserDAO userDao;
-
-    public TokenAuthenticationServiceImpl() {
-        // TODO: parse this as a property
-        tokenHandler = new TokenHandler(DatatypeConverter.parseBase64Binary("9SyECk96oDsTmXfogIfgdjhdsgvagHJLKNLvfdsfR8cbXTvoPjX+Pq/T/b1PqpHX0lYm0oCBjXWICA=="));
+    public TokenAuthenticationServiceImpl(@Value("${app.token.secret}") String tokenSecret,
+                                          @Lazy UserDAO userDao) {
+        this.tokenHandler = new TokenHandler(Base64.getDecoder().decode(tokenSecret));
+        this.userDao = userDao;
     }
 
     @Override
