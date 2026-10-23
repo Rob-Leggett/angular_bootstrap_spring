@@ -36,7 +36,7 @@ The application is split into two modules:
 ### Prerequisites
 - **Java 21** or higher
 - **Maven 3.8+**
-- **Node.js 22** (optional - Maven downloads it automatically)
+- **Node.js 24** (optional - Maven downloads it automatically)
 
 ### Build Everything
 
