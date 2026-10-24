@@ -36,7 +36,7 @@ The application is split into two modules:
 ### Prerequisites
 - **Java 25** or higher
 - **Maven 3.9+**
-- **Node.js 24** (optional - Maven downloads it automatically)
+- **Node.js 26** (`client/.nvmrc`) (optional - Maven downloads it automatically)
 
 ### Build Everything
 
