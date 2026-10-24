@@ -7,7 +7,7 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>Angular Bootstrap Spring</name>
-    <description>Angular 19 with Bootstrap 5 and Spring Boot 3</description>
+    <description>Angular 22 with Bootstrap 5 and Spring Boot 3</description>
     <url>https://github.com/Rob-Leggett/angular_bootstrap_spring</url>
 
     <modules>

@@ -3,10 +3,10 @@
 [![CI](https://github.com/Rob-Leggett/angular_bootstrap_spring/actions/workflows/ci.yml/badge.svg)](https://github.com/Rob-Leggett/angular_bootstrap_spring/actions/workflows/ci.yml)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.org/projects/jdk/21/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3-green.svg)](https://spring.io/projects/spring-boot)
-[![Angular](https://img.shields.io/badge/Angular-19-red.svg)](https://angular.dev/)
+[![Angular](https://img.shields.io/badge/Angular-22-red.svg)](https://angular.dev/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple.svg)](https://getbootstrap.com/)
 
-A modern single-page application built with **Angular 19** and **Bootstrap 5** for the frontend, backed by **Spring Boot 3.3** with **Spring Security 6** for the API.
+A modern single-page application built with **Angular 22** and **Bootstrap 5** for the frontend, backed by **Spring Boot 3.3** with **Spring Security 6** for the API.
 
 ## Tech Stack
 
@@ -19,7 +19,7 @@ A modern single-page application built with **Angular 19** and **Bootstrap 5** f
 - **JUnit 5** for testing
 
 ### Frontend (Client)
-- **Angular 19** with standalone components
+- **Angular 22** with standalone components
 - **Bootstrap 5.3** for styling
 - **TypeScript 5.7**
 - **Angular CLI** for builds

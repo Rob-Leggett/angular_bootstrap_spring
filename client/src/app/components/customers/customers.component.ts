@@ -1,5 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer.model';
@@ -7,8 +6,9 @@ import { Customer } from '../../models/customer.model';
 @Component({
   selector: 'app-customers',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './customers.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './customers.component.scss'
 })
 export class CustomersComponent implements OnInit {
