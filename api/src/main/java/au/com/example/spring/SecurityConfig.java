@@ -2,6 +2,7 @@ package au.com.example.spring;
 
 import au.com.example.spring.security.StatelessAuthenticationFilter;
 import au.com.example.spring.security.StatelessTokenAuthenticationFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -54,9 +56,25 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
             .addFilterBefore(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .addFilterAfter(statelessTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+            .addFilterAfter(statelessTokenAuthenticationFilter, BasicAuthenticationFilter.class);
 
         return http.build();
+    }
+
+    // The stateless filters are Spring beans; stop Boot also registering them as plain servlet filters
+    // so they only run inside the security filter chain.
+    @Bean
+    public FilterRegistrationBean<StatelessAuthenticationFilter> statelessAuthenticationFilterRegistration() {
+        FilterRegistrationBean<StatelessAuthenticationFilter> registration = new FilterRegistrationBean<>(statelessAuthenticationFilter);
+        registration.setEnabled(false);
+        return registration;
+    }
+
+    @Bean
+    public FilterRegistrationBean<StatelessTokenAuthenticationFilter> statelessTokenAuthenticationFilterRegistration() {
+        FilterRegistrationBean<StatelessTokenAuthenticationFilter> registration = new FilterRegistrationBean<>(statelessTokenAuthenticationFilter);
+        registration.setEnabled(false);
+        return registration;
     }
 
     @Bean
@@ -66,8 +84,7 @@ public class SecurityConfig {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
     }

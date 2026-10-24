@@ -2,6 +2,7 @@ package au.com.example.spring.security;
 
 import au.com.example.constant.Constants;
 import au.com.example.service.authentication.TokenAuthenticationService;
+import au.com.example.service.user.model.SpringUserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,9 +28,8 @@ public class StatelessTokenAuthenticationFilter extends GenericFilterBean {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if(authentication != null) {
-            tokenAuthenticationService
-                    .addAuthentication((HttpServletResponse) response, SecurityContextHolder.getContext().getAuthentication());
+        if (authentication != null && authentication.getPrincipal() instanceof SpringUserDetail) {
+            tokenAuthenticationService.addAuthentication((HttpServletResponse) response, authentication);
         }
 
         chain.doFilter(request, response); // continue always

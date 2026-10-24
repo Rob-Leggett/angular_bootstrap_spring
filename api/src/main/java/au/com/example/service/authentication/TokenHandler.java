@@ -1,13 +1,11 @@
 package au.com.example.service.authentication;
 
 import au.com.example.service.user.model.UserDetail;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.json.JsonMapper;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -18,6 +16,8 @@ public final class TokenHandler {
     private static final String HMAC_ALGO = "HmacSHA256";
     private static final String SEPARATOR = ".";
     private static final String SEPARATOR_SPLITTER = "\\.";
+
+    private static final JsonMapper JSON_MAPPER = JsonMapper.shared();
 
     private final Mac hmac;
 
@@ -60,16 +60,16 @@ public final class TokenHandler {
 
     private UserDetail fromJSON(final byte[] userBytes) {
         try {
-            return new ObjectMapper().readValue(new ByteArrayInputStream(userBytes), UserDetail.class);
-        } catch (IOException e) {
+            return JSON_MAPPER.readValue(userBytes, UserDetail.class);
+        } catch (JacksonException e) {
             throw new IllegalStateException(e);
         }
     }
 
     private byte[] toJSON(UserDetail user) {
         try {
-            return new ObjectMapper().writeValueAsBytes(user);
-        } catch (JsonProcessingException e) {
+            return JSON_MAPPER.writeValueAsBytes(user);
+        } catch (JacksonException e) {
             throw new IllegalStateException(e);
         }
     }

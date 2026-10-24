@@ -1,6 +1,6 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Observable, tap, catchError, of, map } from 'rxjs';
+import { Observable, tap, catchError, of, map, switchMap } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -22,9 +22,10 @@ export class AuthService {
 
   private loadStoredAuth(): void {
     const token = localStorage.getItem(this.TOKEN_KEY);
+    // The user itself is fetched lazily by restoreSession(): issuing an HTTP request from this
+    // constructor would re-enter AuthService through the auth interceptor (circular DI).
     if (token) {
       this.tokenSignal.set(token);
-      this.fetchCurrentUser().subscribe();
     }
   }
 
@@ -47,13 +48,24 @@ export class AuthService {
           this.tokenSignal.set(token);
         }
       }),
-      tap(() => this.fetchCurrentUser().subscribe()),
+      switchMap(() => this.fetchCurrentUser()),
       map(() => undefined as void),
       catchError(error => {
         console.error('Login failed:', error);
         throw error;
       })
     );
+  }
+
+  /** Resolves whether there is an authenticated user, restoring it from a stored token if needed. */
+  restoreSession(): Observable<boolean> {
+    if (this.currentUserSignal()) {
+      return of(true);
+    }
+    if (this.tokenSignal()) {
+      return this.fetchCurrentUser().pipe(map(user => user !== null));
+    }
+    return of(false);
   }
 
   logout(): void {

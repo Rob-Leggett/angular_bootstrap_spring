@@ -1,28 +1,28 @@
 # Angular Bootstrap Spring
 
 [![CI](https://github.com/Rob-Leggett/angular_bootstrap_spring/actions/workflows/ci.yml/badge.svg)](https://github.com/Rob-Leggett/angular_bootstrap_spring/actions/workflows/ci.yml)
-[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.org/projects/jdk/21/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3-green.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://openjdk.org/projects/jdk/25/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1-green.svg)](https://spring.io/projects/spring-boot)
 [![Angular](https://img.shields.io/badge/Angular-22-red.svg)](https://angular.dev/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple.svg)](https://getbootstrap.com/)
 
-A modern single-page application built with **Angular 22** and **Bootstrap 5** for the frontend, backed by **Spring Boot 3.3** with **Spring Security 6** for the API.
+A modern single-page application built with **Angular 22** and **Bootstrap 5** for the frontend, backed by **Spring Boot 4.1** with **Spring Security 7** for the API.
 
 ## Tech Stack
 
 ### Backend (API)
-- **Java 21** (LTS)
-- **Spring Boot 3.3** with Spring Security 6
+- **Java 25** (LTS)
+- **Spring Boot 4.1** with Spring Security 7
 - **Stateless JWT-style token authentication**
 - **HSQLDB** in-memory database (for demo purposes)
-- **JPA/Hibernate** for persistence
-- **JUnit 5** for testing
+- **JPA/Hibernate 7** for persistence
+- **JUnit 6** for testing
 
 ### Frontend (Client)
 - **Angular 22** with standalone components
 - **Bootstrap 5.3** for styling
-- **TypeScript 5.7**
-- **Angular CLI** for builds
+- **TypeScript 6.0**
+- **Angular CLI** for builds, **Vitest** for unit tests
 
 ## Architecture
 
@@ -34,8 +34,8 @@ The application is split into two modules:
 ## Quick Start
 
 ### Prerequisites
-- **Java 21** or higher
-- **Maven 3.8+**
+- **Java 25** or higher
+- **Maven 3.9+**
 - **Node.js 24** (optional - Maven downloads it automatically)
 
 ### Build Everything
@@ -97,7 +97,8 @@ The API uses stateless token-based authentication:
 
 ```bash
 cd api
-mvn clean verify        # Run tests
+mvn clean verify        # Run unit tests
+mvn clean verify -Pall-tests  # Run unit + integration tests
 mvn spring-boot:run     # Run with hot reload
 ```
 
@@ -108,7 +109,8 @@ cd client
 npm install             # Install dependencies
 npm start               # Dev server with hot reload
 npm run build           # Production build
-npm run test            # Run unit tests
+npm run test            # Run unit tests (watch mode)
+npm run test:ci         # Run unit tests once
 ```
 
 ### IDE Setup

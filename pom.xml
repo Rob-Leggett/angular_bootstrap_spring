@@ -7,7 +7,7 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>Angular Bootstrap Spring</name>
-    <description>Angular 22 with Bootstrap 5 and Spring Boot 3</description>
+    <description>Angular 22 with Bootstrap 5 and Spring Boot 4</description>
     <url>https://github.com/Rob-Leggett/angular_bootstrap_spring</url>
 
     <modules>
@@ -16,7 +16,7 @@
     </modules>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>25</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
