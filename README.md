@@ -1,10 +1,6 @@
 # Angular Bootstrap Spring
 
-[![CI](https://github.com/Rob-Leggett/angular_bootstrap_spring/actions/workflows/ci.yml/badge.svg)](https://github.com/Rob-Leggett/angular_bootstrap_spring/actions/workflows/ci.yml)
-[![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://openjdk.org/projects/jdk/25/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1-green.svg)](https://spring.io/projects/spring-boot)
-[![Angular](https://img.shields.io/badge/Angular-22-red.svg)](https://angular.dev/)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple.svg)](https://getbootstrap.com/)
+[![CI](https://github.com/Rob-Leggett/angular_bootstrap_spring/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Rob-Leggett/angular_bootstrap_spring/actions/workflows/ci.yml) [![License](https://img.shields.io/github/license/Rob-Leggett/angular_bootstrap_spring)](LICENSE) [![Java 25](https://img.shields.io/badge/Java-25-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org/projects/jdk/25/) [![Node.js 26](https://img.shields.io/badge/Node.js-26-5FA04E?logo=nodedotjs&logoColor=white)](https://nodejs.org/) [![Spring Boot 4.1](https://img.shields.io/badge/Spring%20Boot-4.1-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot) [![Angular 22.2](https://img.shields.io/badge/Angular-22.2-DD0031?logo=angular&logoColor=white)](https://angular.dev/) [![Bootstrap 5.3](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 
 A modern single-page application built with **Angular 22** and **Bootstrap 5** for the frontend, backed by **Spring Boot 4.1** with **Spring Security 7** for the API.
 
